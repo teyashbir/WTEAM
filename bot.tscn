@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://bot2dpro"]
+
+[ext_resource type="Script" path="res://bot.gd" id="1_bot"]
+[ext_resource type="PackedScene" uid="uid://bullet2dpro" path="res://bullet.tscn" id="2_bullet"]
+[ext_resource type="AudioStream" path="res://damage_sound.wav" id="3_hitsfx"]
+[ext_resource type="AudioStream" path="res://gun_sound.wav" id="4_gunsfx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bot"]
+size = Vector2(40, 46)
+
+[node name="Bot" type="CharacterBody2D"]
+script = ExtResource("1_bot")
+bullet_scene = ExtResource("2_bullet")
+
+[node name="VisualRoot" type="Node2D" parent="."]
+
+[node name="ShadowOutline" type="ColorRect" parent="VisualRoot"]
+offset_left = -22.0
+offset_top = -25.0
+offset_right = 22.0
+offset_bottom = 25.0
+color = Color(0.12, 0.06, 0.06, 1)
+
+[node name="Body" type="ColorRect" parent="VisualRoot"]
+offset_left = -19.0
+offset_top = -22.0
+offset_right = 19.0
+offset_bottom = 22.0
+color = Color(0.88, 0.28, 0.22, 1)
+
+[node name="CrownBand" type="ColorRect" parent="VisualRoot/Body"]
+layout_mode = 0
+offset_right = 38.0
+offset_bottom = 6.0
+color = Color(1, 0.78, 0.2, 1)
+
+[node name="EyeLeft" type="ColorRect" parent="VisualRoot/Body"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 14.0
+offset_bottom = 18.0
+color = Color(1, 0.96, 0.3, 1)
+
+[node name="EyeRight" type="ColorRect" parent="VisualRoot/Body"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 11.0
+offset_right = 32.0
+offset_bottom = 18.0
+color = Color(1, 0.96, 0.3, 1)
+
+[node name="NameTag" type="Label" parent="."]
+offset_left = -65.0
+offset_top = -48.0
+offset_right = 65.0
+offset_bottom = -26.0
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "TUNG TUNG SAHUR"
+horizontal_alignment = 1
+
+[node name="GunPivot" type="Node2D" parent="."]
+
+[node name="GunBarrel" type="ColorRect" parent="GunPivot"]
+offset_top = -4.0
+offset_right = 26.0
+offset_bottom = 4.0
+color = Color(0.2, 0.22, 0.28, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bot")
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hitsfx")
+volume_db = -2.0
+
+[node name="ShootSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gunsfx")
+volume_db = -6.0
